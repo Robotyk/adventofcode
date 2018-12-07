@@ -14,38 +14,38 @@ def update_sleepy_minutes(sleepy_minutes, current_line, next_line):
 
 
 file_object = open("data", "r")
-guardSchedule = []
+guard_schedule = []
 for i in file_object:
-    guardSchedule.append(i)
-guardSchedule.sort()
+    guard_schedule.append(i)
+guard_schedule.sort()
 
-guardToMinutesSlept = {}
+guard_to_minutes_slept = {}
 i = 0
-while i < guardSchedule.__len__():
-    currentLine = guardSchedule[i]
-    if "#" not in currentLine:
-        sleptMins = calculate_mins(currentLine, guardSchedule[i + 1])
+while i < guard_schedule.__len__():
+    current_line = guard_schedule[i]
+    if "#" not in current_line:
+        slept_mins = calculate_mins(current_line, guard_schedule[i + 1])
         i += 1
-        if guardToMinutesSlept.get(currentGuard) is None:
-            guardToMinutesSlept[currentGuard] = sleptMins
+        if guard_to_minutes_slept.get(current_guard) is None:
+            guard_to_minutes_slept[current_guard] = slept_mins
         else:
-            guardToMinutesSlept.update({currentGuard: (guardToMinutesSlept.get(currentGuard) + sleptMins)})
+            guard_to_minutes_slept.update({current_guard: (guard_to_minutes_slept.get(current_guard) + slept_mins)})
     else:
-        currentGuard = currentLine[int(currentLine.find("#") + 1):int(currentLine.find(" ", currentLine.find("#") + 1))]
+        current_guard = current_line[int(current_line.find("#") + 1):int(current_line.find(" ", current_line.find("#") + 1))]
     i += 1
-sleepyHeadGuard = max(guardToMinutesSlept.items(), key=operator.itemgetter(1))[0]
+sleepy_head_guard = max(guard_to_minutes_slept.items(), key=operator.itemgetter(1))[0]
 
-sleepyMinutes = {}
+sleepy_minutes = {}
 i = 0
-while i < guardSchedule.__len__():
-    currentLine = guardSchedule[i]
-    if "#" + sleepyHeadGuard in currentLine:
+while i < guard_schedule.__len__():
+    current_line = guard_schedule[i]
+    if "#" + sleepy_head_guard in current_line:
         i += 1
-        while "#" not in guardSchedule[i]:
-            update_sleepy_minutes(sleepyMinutes, guardSchedule[i], guardSchedule[i + 1])
+        while "#" not in guard_schedule[i]:
+            update_sleepy_minutes(sleepy_minutes, guard_schedule[i], guard_schedule[i + 1])
             i += 2
     else:
         i += 1
-sleepyMinute = max(sleepyMinutes.items(), key=operator.itemgetter(1))[0]
-result = int(sleepyHeadGuard) * sleepyMinute
+sleepy_minute = max(sleepy_minutes.items(), key=operator.itemgetter(1))[0]
+result = int(sleepy_head_guard) * sleepy_minute
 print(result)
