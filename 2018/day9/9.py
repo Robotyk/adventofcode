@@ -2,7 +2,7 @@ with open("data", "r") as file:
     data = file.readline().split()
 
 number_of_players = int(data[0])
-last_marble_worth = int(data[6])
+last_marble_worth = int(data[6]) * 100
 
 
 class Node:
