@@ -27,3 +27,9 @@ for i in range(20):
 
 
 print(str(calculate(pots)))
+
+
+# part B solution:
+# for 500 -> 23006
+# for 5000 -> 230006
+# for 50000000000 -> 2300000000006
