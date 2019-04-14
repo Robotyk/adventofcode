@@ -62,7 +62,7 @@ def save_result(max_range_x, min_range_x, max_range_y, min_range_y):
     for i in sky:
         for j in i:
             print(j + " ", end="")
-        print("\n")
+        print("")
     exit(0)
 
 
